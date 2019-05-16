@@ -1,0 +1,25 @@
+# SecurityClassT
+
+## Enum
+
+* `CORP` (value: `"CORP"`)
+* `DTERM` (value: `"DTERM"`)
+* `EQUITY` (value: `"EQUITY"`)
+* `FOPT` (value: `"FOPT"`)
+* `FUT` (value: `"FUT"`)
+* `MLEG` (value: `"MLEG"`)
+* `SOPT` (value: `"SOPT"`)
+* `SPOT` (value: `"SPOT"`)
+* `EQUITY_CASH` (value: `"EQUITY:CASH"`)
+* `EQUITY_CS` (value: `"EQUITY:CS"`)
+* `EQUITY_ETF` (value: `"EQUITY:ETF"`)
+* `EQUITY_FORWARD` (value: `"EQUITY:FORWARD"`)
+* `EQUITY_INDEX` (value: `"EQUITY:INDEX"`)
+* `EQUITY_INDEXOPT` (value: `"EQUITY:INDEXOPT"`)
+* `EQUITY_INDEXOPT_CALL` (value: `"EQUITY:INDEXOPT:CALL"`)
+* `EQUITY_INDEXOPT_PUT` (value: `"EQUITY:INDEXOPT:PUT"`)
+* `EQUITY_OPT` (value: `"EQUITY:OPT"`)
+* `EQUITY_OPT_CALL` (value: `"EQUITY:OPT:CALL"`)
+* `EQUITY_OPT_PUT` (value: `"EQUITY:OPT:PUT"`)
+* `EQUITY_OPTEXER` (value: `"EQUITY:OPTEXER"`)
+* `EQUITY_PS` (value: `"EQUITY:PS"`)
