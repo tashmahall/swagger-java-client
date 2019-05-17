@@ -351,12 +351,12 @@ public class AlgosApi {
         final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
 
-//        final String[] localVarContentTypes = {
-//            "application/json#sorder", "application/json#fxorder", "application/json#boffer", "application/json#sniper", "application/json#mit", "application/json#spread", "application/json#lgshort", "application/json#financ", "application/json#grddin", "application/json#grdlin", "application/json#arbintf"
-//        };
         final String[] localVarContentTypes = {
-                "application/json"
-            };
+            "application/json#sorder", "application/json#fxorder", "application/json#boffer", "application/json#sniper", "application/json#mit", "application/json#spread", "application/json#lgshort", "application/json#financ", "application/json#grddin", "application/json#grdlin", "application/json#arbintf"
+        };
+//        final String[] localVarContentTypes = {
+//                "application/json"
+//            };
         final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);
 

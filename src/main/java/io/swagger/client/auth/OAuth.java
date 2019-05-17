@@ -31,7 +31,7 @@ import java.util.List;
   @Override
   public void applyToParams(List<Pair> queryParams, Map<String, String> headerParams) {
     if (accessToken != null) {
-      headerParams.put("Authorization", "Bearer " + accessToken);
+      headerParams.put("Authorization",  String.format("Bearer %s",accessToken));
     }
   }
 }

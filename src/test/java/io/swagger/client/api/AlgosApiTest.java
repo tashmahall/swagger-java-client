@@ -19,6 +19,7 @@ import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.swagger.client.ApiClient;
@@ -101,8 +102,11 @@ public class AlgosApiTest {
     			"    }\n" + 
     			"  ]\n" + 
     			"}";
-        ABMessageSorder body = new ObjectMapper().readValue(algo, ABMessageSorder.class) ;
-        InlineResponse202 response = api.executeStrategy(body);
+        
+            ABMessageSorder body = new ObjectMapper().readValue(algo, ABMessageSorder.class) ; // ABMessageGrddin | Strategy to execute
+            InlineResponse202 response = api.executeStrategy(body);
+            System.out.println(new ObjectMapper().convertValue(response, JsonNode.class).toString());
+//        
 
         // TODO: test validations
     }
