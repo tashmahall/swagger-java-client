@@ -12,6 +12,15 @@
 
 package io.swagger.client.api;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.threeten.bp.LocalDate;
+
 import io.swagger.client.ApiCallback;
 import io.swagger.client.ApiClient;
 import io.swagger.client.ApiException;
@@ -20,26 +29,11 @@ import io.swagger.client.Configuration;
 import io.swagger.client.Pair;
 import io.swagger.client.ProgressRequestBody;
 import io.swagger.client.ProgressResponseBody;
-
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-
-
-import java.math.BigDecimal;
 import io.swagger.client.model.DerivativesSecurityClassT;
-import io.swagger.client.model.Error;
 import io.swagger.client.model.ExchangeIDT;
-import org.threeten.bp.LocalDate;
 import io.swagger.client.model.OptionTypeT;
 import io.swagger.client.model.SecurityClassT;
 import io.swagger.client.model.StrategyRecords;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MarketdataApi {
     private ApiClient apiClient;
@@ -110,7 +104,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangeValidateBeforeCall(ExchangeIDT exchangeId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'exchangeId' is set
         if (exchangeId == null) {
@@ -147,8 +141,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangeWithHttpInfo(ExchangeIDT exchangeId) throws ApiException {
         com.squareup.okhttp.Call call = getExchangeValidateBeforeCall(exchangeId, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -181,8 +174,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangeValidateBeforeCall(exchangeId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -235,7 +227,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangeHolidaysValidateBeforeCall(ExchangeIDT exchangeId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'exchangeId' is set
         if (exchangeId == null) {
@@ -272,8 +264,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangeHolidaysWithHttpInfo(ExchangeIDT exchangeId) throws ApiException {
         com.squareup.okhttp.Call call = getExchangeHolidaysValidateBeforeCall(exchangeId, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -306,8 +297,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangeHolidaysValidateBeforeCall(exchangeId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -362,7 +352,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangeInstrumentValidateBeforeCall(ExchangeIDT exchangeId, String symbol, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'exchangeId' is set
         if (exchangeId == null) {
@@ -405,8 +395,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangeInstrumentWithHttpInfo(ExchangeIDT exchangeId, String symbol) throws ApiException {
         com.squareup.okhttp.Call call = getExchangeInstrumentValidateBeforeCall(exchangeId, symbol, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -440,8 +429,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangeInstrumentValidateBeforeCall(exchangeId, symbol, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -514,7 +502,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangeInstrumentDerivativesValidateBeforeCall(ExchangeIDT exchangeId, String symbol, LocalDate maturityDate, BigDecimal initStrike, BigDecimal endStrike, DerivativesSecurityClassT securityType, OptionTypeT optionType, Integer detailed, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'exchangeId' is set
         if (exchangeId == null) {
@@ -569,8 +557,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangeInstrumentDerivativesWithHttpInfo(ExchangeIDT exchangeId, String symbol, LocalDate maturityDate, BigDecimal initStrike, BigDecimal endStrike, DerivativesSecurityClassT securityType, OptionTypeT optionType, Integer detailed) throws ApiException {
         com.squareup.okhttp.Call call = getExchangeInstrumentDerivativesValidateBeforeCall(exchangeId, symbol, maturityDate, initStrike, endStrike, securityType, optionType, detailed, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -610,8 +597,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangeInstrumentDerivativesValidateBeforeCall(exchangeId, symbol, maturityDate, initStrike, endStrike, securityType, optionType, detailed, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -684,7 +670,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangeInstrumentDerivativesSymbolsValidateBeforeCall(ExchangeIDT exchangeId, String symbol, LocalDate maturityDate, BigDecimal initStrike, BigDecimal endStrike, DerivativesSecurityClassT securityType, OptionTypeT optionType, Integer detailed, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'exchangeId' is set
         if (exchangeId == null) {
@@ -739,8 +725,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangeInstrumentDerivativesSymbolsWithHttpInfo(ExchangeIDT exchangeId, String symbol, LocalDate maturityDate, BigDecimal initStrike, BigDecimal endStrike, DerivativesSecurityClassT securityType, OptionTypeT optionType, Integer detailed) throws ApiException {
         com.squareup.okhttp.Call call = getExchangeInstrumentDerivativesSymbolsValidateBeforeCall(exchangeId, symbol, maturityDate, initStrike, endStrike, securityType, optionType, detailed, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -780,8 +765,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangeInstrumentDerivativesSymbolsValidateBeforeCall(exchangeId, symbol, maturityDate, initStrike, endStrike, securityType, optionType, detailed, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -836,7 +820,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangeInstrumentLastBookValidateBeforeCall(ExchangeIDT exchangeId, String symbol, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'exchangeId' is set
         if (exchangeId == null) {
@@ -879,8 +863,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangeInstrumentLastBookWithHttpInfo(ExchangeIDT exchangeId, String symbol) throws ApiException {
         com.squareup.okhttp.Call call = getExchangeInstrumentLastBookValidateBeforeCall(exchangeId, symbol, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -914,8 +897,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangeInstrumentLastBookValidateBeforeCall(exchangeId, symbol, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -973,7 +955,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangeInstrumentLastQuoteValidateBeforeCall(ExchangeIDT exchangeId, String symbol, Integer detailed, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'exchangeId' is set
         if (exchangeId == null) {
@@ -1018,8 +1000,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangeInstrumentLastQuoteWithHttpInfo(ExchangeIDT exchangeId, String symbol, Integer detailed) throws ApiException {
         com.squareup.okhttp.Call call = getExchangeInstrumentLastQuoteValidateBeforeCall(exchangeId, symbol, detailed, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -1054,8 +1035,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangeInstrumentLastQuoteValidateBeforeCall(exchangeId, symbol, detailed, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -1113,7 +1093,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangeInstrumentSnapshotValidateBeforeCall(ExchangeIDT exchangeId, String symbol, Integer detailed, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'exchangeId' is set
         if (exchangeId == null) {
@@ -1158,8 +1138,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangeInstrumentSnapshotWithHttpInfo(ExchangeIDT exchangeId, String symbol, Integer detailed) throws ApiException {
         com.squareup.okhttp.Call call = getExchangeInstrumentSnapshotValidateBeforeCall(exchangeId, symbol, detailed, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -1194,8 +1173,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangeInstrumentSnapshotValidateBeforeCall(exchangeId, symbol, detailed, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -1253,7 +1231,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangeInstrumentTradesValidateBeforeCall(ExchangeIDT exchangeId, String symbol, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'exchangeId' is set
         if (exchangeId == null) {
@@ -1298,8 +1276,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangeInstrumentTradesWithHttpInfo(ExchangeIDT exchangeId, String symbol, Integer limit) throws ApiException {
         com.squareup.okhttp.Call call = getExchangeInstrumentTradesValidateBeforeCall(exchangeId, symbol, limit, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -1334,8 +1311,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangeInstrumentTradesValidateBeforeCall(exchangeId, symbol, limit, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -1391,7 +1367,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangeInstrumentsValidateBeforeCall(ExchangeIDT exchangeId, SecurityClassT securityClass, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'exchangeId' is set
         if (exchangeId == null) {
@@ -1430,8 +1406,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangeInstrumentsWithHttpInfo(ExchangeIDT exchangeId, SecurityClassT securityClass) throws ApiException {
         com.squareup.okhttp.Call call = getExchangeInstrumentsValidateBeforeCall(exchangeId, securityClass, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -1465,8 +1440,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangeInstrumentsValidateBeforeCall(exchangeId, securityClass, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -1522,7 +1496,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangeMaturityDatesValidateBeforeCall(ExchangeIDT exchangeId, SecurityClassT securityClass, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'exchangeId' is set
         if (exchangeId == null) {
@@ -1565,8 +1539,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangeMaturityDatesWithHttpInfo(ExchangeIDT exchangeId, SecurityClassT securityClass) throws ApiException {
         com.squareup.okhttp.Call call = getExchangeMaturityDatesValidateBeforeCall(exchangeId, securityClass, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -1600,8 +1573,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangeMaturityDatesValidateBeforeCall(exchangeId, securityClass, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -1654,7 +1626,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangeParamsValidateBeforeCall(ExchangeIDT exchangeId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'exchangeId' is set
         if (exchangeId == null) {
@@ -1691,8 +1663,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangeParamsWithHttpInfo(ExchangeIDT exchangeId) throws ApiException {
         com.squareup.okhttp.Call call = getExchangeParamsValidateBeforeCall(exchangeId, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -1725,8 +1696,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangeParamsValidateBeforeCall(exchangeId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -1782,7 +1752,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangeSymbolsValidateBeforeCall(ExchangeIDT exchangeId, SecurityClassT securityClass, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'exchangeId' is set
         if (exchangeId == null) {
@@ -1821,8 +1791,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangeSymbolsWithHttpInfo(ExchangeIDT exchangeId, SecurityClassT securityClass) throws ApiException {
         com.squareup.okhttp.Call call = getExchangeSymbolsValidateBeforeCall(exchangeId, securityClass, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -1856,8 +1825,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangeSymbolsValidateBeforeCall(exchangeId, securityClass, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -1908,7 +1876,7 @@ public class MarketdataApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getExchangesValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = getExchangesCall(progressListener, progressRequestListener);
@@ -1939,8 +1907,7 @@ public class MarketdataApi {
      */
     public ApiResponse<StrategyRecords> getExchangesWithHttpInfo() throws ApiException {
         com.squareup.okhttp.Call call = getExchangesValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -1972,8 +1939,7 @@ public class MarketdataApi {
         }
 
         com.squareup.okhttp.Call call = getExchangesValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
 }

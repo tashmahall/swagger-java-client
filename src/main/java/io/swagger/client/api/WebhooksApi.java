@@ -12,6 +12,13 @@
 
 package io.swagger.client.api;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
 import io.swagger.client.ApiCallback;
 import io.swagger.client.ApiClient;
 import io.swagger.client.ApiException;
@@ -20,22 +27,8 @@ import io.swagger.client.Configuration;
 import io.swagger.client.Pair;
 import io.swagger.client.ProgressRequestBody;
 import io.swagger.client.ProgressResponseBody;
-
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-
-
-import io.swagger.client.model.Error;
 import io.swagger.client.model.Success;
-import java.util.UUID;
 import io.swagger.client.model.Webhook;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class WebhooksApi {
     private ApiClient apiClient;
@@ -106,7 +99,7 @@ public class WebhooksApi {
         return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call delWebhookValidateBeforeCall(UUID webhookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'webhookId' is set
         if (webhookId == null) {
@@ -143,8 +136,7 @@ public class WebhooksApi {
      */
     public ApiResponse<Success> delWebhookWithHttpInfo(UUID webhookId) throws ApiException {
         com.squareup.okhttp.Call call = delWebhookValidateBeforeCall(webhookId, null, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, Success.class);
     }
 
     /**
@@ -177,8 +169,7 @@ public class WebhooksApi {
         }
 
         com.squareup.okhttp.Call call = delWebhookValidateBeforeCall(webhookId, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, Success.class, callback);
         return call;
     }
     /**
@@ -229,7 +220,7 @@ public class WebhooksApi {
         return apiClient.buildCall(localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call delWebhooksValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = delWebhooksCall(progressListener, progressRequestListener);
@@ -260,8 +251,7 @@ public class WebhooksApi {
      */
     public ApiResponse<Success> delWebhooksWithHttpInfo() throws ApiException {
         com.squareup.okhttp.Call call = delWebhooksValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, Success.class);
     }
 
     /**
@@ -293,8 +283,7 @@ public class WebhooksApi {
         }
 
         com.squareup.okhttp.Call call = delWebhooksValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<Success>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, Success.class, callback);
         return call;
     }
     /**
@@ -347,7 +336,6 @@ public class WebhooksApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getWebhookValidateBeforeCall(UUID webhookId, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'webhookId' is set
         if (webhookId == null) {
@@ -466,7 +454,7 @@ public class WebhooksApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call getWebhooksValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = getWebhooksCall(progressListener, progressRequestListener);
@@ -579,7 +567,7 @@ public class WebhooksApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+   
     private com.squareup.okhttp.Call registerWebhookValidateBeforeCall(Webhook body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = registerWebhookCall(body, progressListener, progressRequestListener);

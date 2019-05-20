@@ -13,8 +13,6 @@
 package io.swagger.client;
 
 import java.io.IOException;
-import java.io.StringReader;
-import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.ParsePosition;
@@ -26,7 +24,7 @@ import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -37,6 +35,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 import io.gsonfire.GsonFireBuilder;
+import io.swagger.client.utils.JackJsonUtils;
 
 public class JSON {
     private Gson gson;
@@ -107,16 +106,10 @@ public class JSON {
      *
      * @param obj Object
      * @return String representation of the JSON
+     * @throws JsonProcessingException 
      */
-    public String serialize(Object obj) {
-    	try {
-			return new ObjectMapper().writeValueAsString(obj);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	return null;
-//        return gson.toJson(obj);
+    public String serialize(Object obj) throws JsonProcessingException {
+    	return JackJsonUtils.entityToStringJson(obj);
     }
 
     /**
@@ -126,26 +119,12 @@ public class JSON {
      * @param body       The JSON string
      * @param returnType The type to deserialize into
      * @return The deserialized Java object
+     * @throws IOException 
+     * @throws JsonMappingException 
+     * @throws com.fasterxml.jackson.core.JsonParseException 
      */
-    @SuppressWarnings("unchecked")
-    public <T> T deserialize(String body, Type returnType) {
-    	
-        try {
-            if (isLenientOnJson) {
-                JsonReader jsonReader = new JsonReader(new StringReader(body));
-                // see https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/stream/JsonReader.html#setLenient(boolean)
-                jsonReader.setLenient(true);
-                return gson.fromJson(jsonReader, returnType);
-            } else {
-                return gson.fromJson(body, returnType);
-            }
-        } catch (JsonParseException e) {
-            // Fallback processing when failed to parse JSON form response body:
-            // return the response body string directly for the String return type;
-            if (returnType.equals(String.class))
-                return (T) body;
-            else throw (e);
-        }
+    public <T> T deserialize(String body, Class<T> clazz) throws com.fasterxml.jackson.core.JsonParseException, JsonMappingException, IOException {
+    	return JackJsonUtils.jsonStringToEntity(body, clazz);
     }
 
     /**

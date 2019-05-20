@@ -12,17 +12,6 @@
 
 package io.swagger.client;
 
-import com.squareup.okhttp.*;
-import com.squareup.okhttp.internal.http.HttpMethod;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
-import okio.BufferedSink;
-import okio.Okio;
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.OffsetDateTime;
-import org.threeten.bp.format.DateTimeFormatter;
-
-import javax.net.ssl.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,16 +27,54 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.text.DateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
+
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.Headers;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.MultipartBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+import com.squareup.okhttp.internal.http.HttpMethod;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
+
+import io.swagger.client.auth.ApiKeyAuth;
 import io.swagger.client.auth.Authentication;
 import io.swagger.client.auth.HttpBasicAuth;
-import io.swagger.client.auth.ApiKeyAuth;
 import io.swagger.client.auth.OAuth;
+import okio.BufferedSink;
+import okio.Okio;
 
 public class ApiClient {
 
@@ -482,25 +509,30 @@ public class ApiClient {
 	 *
 	 * @param param Parameter
 	 * @return String representation of the parameter
+	 * @throws JsonProcessingException 
 	 */
-	public String parameterToString(Object param) {
-		if (param == null) {
-			return "";
-		} else if (param instanceof Date || param instanceof OffsetDateTime || param instanceof LocalDate) {
-			// Serialize to json string and remove the " enclosing characters
-			String jsonStr = json.serialize(param);
-			return jsonStr.substring(1, jsonStr.length() - 1);
-		} else if (param instanceof Collection) {
-			StringBuilder b = new StringBuilder();
-			for (Object o : (Collection) param) {
-				if (b.length() > 0) {
-					b.append(",");
+	public String parameterToString(Object param) throws ApiException {
+		try {
+			if (param == null) {
+				return "";
+			} else if (param instanceof Date || param instanceof OffsetDateTime || param instanceof LocalDate) {
+				// Serialize to json string and remove the " enclosing characters
+				String jsonStr = json.serialize(param);
+				return jsonStr.substring(1, jsonStr.length() - 1);
+			} else if (param instanceof Collection) {
+				StringBuilder b = new StringBuilder();
+				for (Object o : (Collection) param) {
+					if (b.length() > 0) {
+						b.append(",");
+					}
+					b.append(String.valueOf(o));
 				}
-				b.append(String.valueOf(o));
+				return b.toString();
+			} else {
+				return String.valueOf(param);
 			}
-			return b.toString();
-		} else {
-			return String.valueOf(param);
+		}catch( JsonProcessingException e) {
+			throw new ApiException(e);
 		}
 	}
 
@@ -513,8 +545,10 @@ public class ApiClient {
 	 * @param name  The name of the parameter.
 	 * @param value The value of the parameter.
 	 * @return A list containing a single {@code Pair} object.
+	 * @throws ApiException 
+	 * @throws JsonProcessingException 
 	 */
-	public List<Pair> parameterToPair(String name, Object value) {
+	public List<Pair> parameterToPair(String name, Object value) throws ApiException  {
 		List<Pair> params = new ArrayList<Pair>();
 
 		// preconditions
@@ -536,8 +570,10 @@ public class ApiClient {
 	 * @param name             The name of the parameter.
 	 * @param value            The value of the parameter.
 	 * @return A list of {@code Pair} objects.
+	 * @throws ApiException 
+	 * @throws JsonProcessingException 
 	 */
-	public List<Pair> parameterToPairs(String collectionFormat, String name, Collection value) {
+	public List<Pair> parameterToPairs(String collectionFormat, String name, Collection value) throws ApiException  {
 		List<Pair> params = new ArrayList<Pair>();
 
 		// preconditions
@@ -675,7 +711,7 @@ public class ApiClient {
 	 *                      supported.
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T deserialize(Response response, Type returnType) throws ApiException {
+	public <T> T deserialize(Response response, Class<T> returnType) throws ApiException {
 		if (response == null || returnType == null) {
 			return null;
 		}
@@ -711,15 +747,20 @@ public class ApiClient {
 			// ensuring a default content type
 			contentType = "application/json";
 		}
-		if (isJsonMime(contentType)) {
-			return json.deserialize(respBody, returnType);
-		} else if (returnType.equals(String.class)) {
-			// Expecting string, return the raw response body.
-			return (T) respBody;
-		} else {
-			throw new ApiException("Content type \"" + contentType + "\" is not supported for type: " + returnType,
-					response.code(), response.headers().toMultimap(), respBody);
+		try {
+			if (isJsonMime(contentType)) {
+				return json.deserialize(respBody, returnType);
+			} else if (returnType.equals(String.class)) {
+				// Expecting string, return the raw response body.
+				return (T) respBody;
+			} else {
+				throw new ApiException("Content type \"" + contentType + "\" is not supported for type: " + returnType,
+						response.code(), response.headers().toMultimap(), respBody);
+			}
+		}catch (IOException e) {
+			throw new ApiException(e.getMessage());
 		}
+
 	}
 
 	/**
@@ -732,22 +773,26 @@ public class ApiClient {
 	 * @throws ApiException If fail to serialize the given object
 	 */
 	public RequestBody serialize(Object obj, String contentType) throws ApiException {
-		if (obj instanceof byte[]) {
-			// Binary (byte array) body parameter support.
-			return RequestBody.create(MediaType.parse(contentType), (byte[]) obj);
-		} else if (obj instanceof File) {
-			// File body parameter support.
-			return RequestBody.create(MediaType.parse(contentType), (File) obj);
-		} else if (isJsonMime(contentType)) {
-			String content;
-			if (obj != null) {
-				content = json.serialize(obj);
+		try {
+			if (obj instanceof byte[]) {
+				// Binary (byte array) body parameter support.
+				return RequestBody.create(MediaType.parse(contentType), (byte[]) obj);
+			} else if (obj instanceof File) {
+				// File body parameter support.
+				return RequestBody.create(MediaType.parse(contentType), (File) obj);
+			} else if (isJsonMime(contentType)) {
+				String content;
+				if (obj != null) {
+					content = json.serialize(obj);
+				} else {
+					content = null;
+				}
+				return RequestBody.create(MediaType.parse(contentType), content);
 			} else {
-				content = null;
+				throw new ApiException("Content type \"" + contentType + "\" is not supported");
 			}
-			return RequestBody.create(MediaType.parse(contentType), content);
-		} else {
-			throw new ApiException("Content type \"" + contentType + "\" is not supported");
+		}catch(JsonProcessingException e) {
+			throw new ApiException(e);
 		}
 	}
 
@@ -838,7 +883,7 @@ public class ApiClient {
 	 *         null when returnType is null.
 	 * @throws ApiException If fail to execute the call
 	 */
-	public <T> ApiResponse<T> execute(Call call, Type returnType) throws ApiException {
+	public <T> ApiResponse<T> execute(Call call, Class<T> returnType) throws ApiException {
 		try {
 			Response response = call.execute();
 			T data = handleResponse(response, returnType);
@@ -869,7 +914,7 @@ public class ApiClient {
 	 * @param callback   ApiCallback
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> void executeAsync(Call call, final Type returnType, final ApiCallback<T> callback) {
+	public <T> void executeAsync(Call call, final Class<T> returnType, final ApiCallback<T> callback) {
 		call.enqueue(new Callback() {
 			@Override
 			public void onFailure(Request request, IOException e) {
@@ -901,7 +946,7 @@ public class ApiClient {
 	 *                      to deserialize the response body
 	 * @return Type
 	 */
-	public <T> T handleResponse(Response response, Type returnType) throws ApiException {
+	public <T> T handleResponse(Response response, Class<T> returnType) throws ApiException {
 		if (response.isSuccessful()) {
 			if (returnType == null || response.code() == 204) {
 				// returning null if the returnType is not defined,
@@ -1025,8 +1070,9 @@ public class ApiClient {
 	 * @param queryParams           The query parameters
 	 * @param collectionQueryParams The collection query parameters
 	 * @return The full URL
+	 * @throws ApiException 
 	 */
-	public String buildUrl(String path, List<Pair> queryParams, List<Pair> collectionQueryParams) {
+	public String buildUrl(String path, List<Pair> queryParams, List<Pair> collectionQueryParams) throws ApiException {
 		final StringBuilder url = new StringBuilder();
 		url.append(basePath).append(path);
 
@@ -1072,8 +1118,9 @@ public class ApiClient {
 	 *
 	 * @param headerParams Header parameters in the ofrm of Map
 	 * @param reqBuilder   Reqeust.Builder
+	 * @throws ApiException 
 	 */
-	public void processHeaderParams(Map<String, String> headerParams, Request.Builder reqBuilder) {
+	public void processHeaderParams(Map<String, String> headerParams, Request.Builder reqBuilder) throws ApiException {
 		for (Entry<String, String> param : headerParams.entrySet()) {
 			reqBuilder.header(param.getKey(), parameterToString(param.getValue()));
 		}
@@ -1105,8 +1152,9 @@ public class ApiClient {
 	 *
 	 * @param formParams Form parameters in the form of Map
 	 * @return RequestBody
+	 * @throws ApiException 
 	 */
-	public RequestBody buildRequestBodyFormEncoding(Map<String, Object> formParams) {
+	public RequestBody buildRequestBodyFormEncoding(Map<String, Object> formParams) throws ApiException {
 		FormEncodingBuilder formBuilder = new FormEncodingBuilder();
 		for (Entry<String, Object> param : formParams.entrySet()) {
 			formBuilder.add(param.getKey(), parameterToString(param.getValue()));
@@ -1120,8 +1168,9 @@ public class ApiClient {
 	 *
 	 * @param formParams Form parameters in the form of Map
 	 * @return RequestBody
+	 * @throws ApiException 
 	 */
-	public RequestBody buildRequestBodyMultipart(Map<String, Object> formParams) {
+	public RequestBody buildRequestBodyMultipart(Map<String, Object> formParams) throws ApiException {
 		MultipartBuilder mpBuilder = new MultipartBuilder().type(MultipartBuilder.FORM);
 		for (Entry<String, Object> param : formParams.entrySet()) {
 			if (param.getValue() instanceof File) {

@@ -13,14 +13,11 @@
 package io.swagger.client.api;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import com.google.gson.reflect.TypeToken;
 
 import io.swagger.client.ApiCallback;
 import io.swagger.client.ApiClient;
@@ -45,6 +42,7 @@ import io.swagger.client.model.Command;
 import io.swagger.client.model.Error;
 import io.swagger.client.model.InlineResponse202;
 import io.swagger.client.model.StrategyCodeT;
+import io.swagger.client.model.StrategyCommandResponse;
 import io.swagger.client.model.StrategyRecords;
 
 public class AlgosApi {
@@ -117,7 +115,6 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call editStrategyValidateBeforeCall(UUID clOrdID, ABMessageGrddin body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'clOrdID' is set
         if (clOrdID == null) {
@@ -156,8 +153,7 @@ public class AlgosApi {
      */
     public ApiResponse<Error> editStrategyWithHttpInfo(UUID clOrdID, ABMessageGrddin body) throws ApiException {
         com.squareup.okhttp.Call call = editStrategyValidateBeforeCall(clOrdID, body, null, null);
-        Type localVarReturnType = new TypeToken<Error>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, Error.class);
     }
 
     /**
@@ -191,8 +187,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = editStrategyValidateBeforeCall(clOrdID, body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<Error>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, Error.class, callback);
         return call;
     }
     /**
@@ -246,7 +241,6 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call editStrategyValidateBeforeCall(UUID clOrdID, ABMessageGrdlin body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'clOrdID' is set
         if (clOrdID == null) {
@@ -285,8 +279,7 @@ public class AlgosApi {
      */
     public ApiResponse<Error> editStrategyWithHttpInfo(UUID clOrdID, ABMessageGrdlin body) throws ApiException {
         com.squareup.okhttp.Call call = editStrategyValidateBeforeCall(clOrdID, body, null, null);
-        Type localVarReturnType = new TypeToken<Error>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, Error.class);
     }
 
     /**
@@ -320,8 +313,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = editStrategyValidateBeforeCall(clOrdID, body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<Error>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, Error.class, callback);
         return call;
     }
     /**
@@ -376,16 +368,10 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call executeStrategyValidateBeforeCall(ABMessageSorder body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = executeStrategyCall(body, progressListener, progressRequestListener);
         return call;
-
-        
-        
-        
-        
     }
 
     /**
@@ -409,8 +395,7 @@ public class AlgosApi {
      */
     public ApiResponse<InlineResponse202> executeStrategyWithHttpInfo(ABMessageSorder body) throws ApiException {
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, InlineResponse202.class);
     }
 
     /**
@@ -443,8 +428,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, InlineResponse202.class, callback);
         return call;
     }
     /**
@@ -496,7 +480,6 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call executeStrategyValidateBeforeCall(ABMessageFxorder body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = executeStrategyCall(body, progressListener, progressRequestListener);
@@ -529,8 +512,7 @@ public class AlgosApi {
      */
     public ApiResponse<InlineResponse202> executeStrategyWithHttpInfo(ABMessageFxorder body) throws ApiException {
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, InlineResponse202.class);
     }
 
     /**
@@ -563,8 +545,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, InlineResponse202.class, callback);
         return call;
     }
     /**
@@ -616,16 +597,11 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call executeStrategyValidateBeforeCall(ABMessageBoffer body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = executeStrategyCall(body, progressListener, progressRequestListener);
         return call;
 
-        
-        
-        
-        
     }
 
     /**
@@ -649,8 +625,7 @@ public class AlgosApi {
      */
     public ApiResponse<InlineResponse202> executeStrategyWithHttpInfo(ABMessageBoffer body) throws ApiException {
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, InlineResponse202.class);
     }
 
     /**
@@ -683,8 +658,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, InlineResponse202.class, callback);
         return call;
     }
     /**
@@ -736,7 +710,7 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+    
     private com.squareup.okhttp.Call executeStrategyValidateBeforeCall(ABMessageSniper body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = executeStrategyCall(body, progressListener, progressRequestListener);
@@ -769,8 +743,7 @@ public class AlgosApi {
      */
     public ApiResponse<InlineResponse202> executeStrategyWithHttpInfo(ABMessageSniper body) throws ApiException {
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, InlineResponse202.class);
     }
 
     /**
@@ -803,8 +776,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, InlineResponse202.class, callback);
         return call;
     }
     /**
@@ -856,7 +828,7 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+    
     private com.squareup.okhttp.Call executeStrategyValidateBeforeCall(ABMessageMit body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = executeStrategyCall(body, progressListener, progressRequestListener);
@@ -889,8 +861,7 @@ public class AlgosApi {
      */
     public ApiResponse<InlineResponse202> executeStrategyWithHttpInfo(ABMessageMit body) throws ApiException {
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, InlineResponse202.class);
     }
 
     /**
@@ -923,8 +894,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, InlineResponse202.class, callback);
         return call;
     }
     /**
@@ -976,7 +946,7 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+    
     private com.squareup.okhttp.Call executeStrategyValidateBeforeCall(ABMessageSpread body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = executeStrategyCall(body, progressListener, progressRequestListener);
@@ -1009,8 +979,7 @@ public class AlgosApi {
      */
     public ApiResponse<InlineResponse202> executeStrategyWithHttpInfo(ABMessageSpread body) throws ApiException {
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, InlineResponse202.class);
     }
 
     /**
@@ -1043,8 +1012,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, InlineResponse202.class, callback);
         return call;
     }
     /**
@@ -1096,7 +1064,7 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+    
     private com.squareup.okhttp.Call executeStrategyValidateBeforeCall(ABMessageLgshort body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = executeStrategyCall(body, progressListener, progressRequestListener);
@@ -1129,8 +1097,7 @@ public class AlgosApi {
      */
     public ApiResponse<InlineResponse202> executeStrategyWithHttpInfo(ABMessageLgshort body) throws ApiException {
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, InlineResponse202.class);
     }
 
     /**
@@ -1163,8 +1130,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, InlineResponse202.class, callback);
         return call;
     }
     /**
@@ -1216,7 +1182,7 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+    
     private com.squareup.okhttp.Call executeStrategyValidateBeforeCall(ABMessageFinanc body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = executeStrategyCall(body, progressListener, progressRequestListener);
@@ -1249,8 +1215,7 @@ public class AlgosApi {
      */
     public ApiResponse<InlineResponse202> executeStrategyWithHttpInfo(ABMessageFinanc body) throws ApiException {
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, InlineResponse202.class);
     }
 
     /**
@@ -1283,8 +1248,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, InlineResponse202.class, callback);
         return call;
     }
     /**
@@ -1336,7 +1300,7 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+    
     private com.squareup.okhttp.Call executeStrategyValidateBeforeCall(ABMessageGrddin body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = executeStrategyCall(body, progressListener, progressRequestListener);
@@ -1369,8 +1333,7 @@ public class AlgosApi {
      */
     public ApiResponse<InlineResponse202> executeStrategyWithHttpInfo(ABMessageGrddin body) throws ApiException {
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, InlineResponse202.class);
     }
 
     /**
@@ -1403,8 +1366,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, InlineResponse202.class, callback);
         return call;
     }
     /**
@@ -1456,7 +1418,7 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+    
     private com.squareup.okhttp.Call executeStrategyValidateBeforeCall(ABMessageGrdlin body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = executeStrategyCall(body, progressListener, progressRequestListener);
@@ -1489,8 +1451,7 @@ public class AlgosApi {
      */
     public ApiResponse<InlineResponse202> executeStrategyWithHttpInfo(ABMessageGrdlin body) throws ApiException {
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, InlineResponse202.class);
     }
 
     /**
@@ -1523,8 +1484,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, InlineResponse202.class, callback);
         return call;
     }
     /**
@@ -1576,7 +1536,7 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+    
     private com.squareup.okhttp.Call executeStrategyValidateBeforeCall(ABMessageArbintf body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = executeStrategyCall(body, progressListener, progressRequestListener);
@@ -1609,8 +1569,7 @@ public class AlgosApi {
      */
     public ApiResponse<InlineResponse202> executeStrategyWithHttpInfo(ABMessageArbintf body) throws ApiException {
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, InlineResponse202.class);
     }
 
     /**
@@ -1643,8 +1602,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = executeStrategyValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse202>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, InlineResponse202.class, callback);
         return call;
     }
     /**
@@ -1703,7 +1661,7 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+    
     private com.squareup.okhttp.Call executeStrategyCommandValidateBeforeCall(UUID clOrdID, String action, String mark, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'clOrdID' is set
         if (clOrdID == null) {
@@ -1728,8 +1686,8 @@ public class AlgosApi {
      * @return Error
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public Error executeStrategyCommand(UUID clOrdID, String action, String mark) throws ApiException {
-        ApiResponse<Error> resp = executeStrategyCommandWithHttpInfo(clOrdID, action, mark);
+    public StrategyCommandResponse executeStrategyCommand(UUID clOrdID, String action, String mark) throws ApiException {
+        ApiResponse<StrategyCommandResponse> resp = executeStrategyCommandWithHttpInfo(clOrdID, action, mark);
         return resp.getData();
     }
 
@@ -1742,10 +1700,9 @@ public class AlgosApi {
      * @return ApiResponse&lt;Error&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Error> executeStrategyCommandWithHttpInfo(UUID clOrdID, String action, String mark) throws ApiException {
+    public ApiResponse<StrategyCommandResponse> executeStrategyCommandWithHttpInfo(UUID clOrdID, String action, String mark) throws ApiException {
         com.squareup.okhttp.Call call = executeStrategyCommandValidateBeforeCall(clOrdID, action, mark, null, null);
-        Type localVarReturnType = new TypeToken<Error>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyCommandResponse.class);
     }
 
     /**
@@ -1780,8 +1737,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = executeStrategyCommandValidateBeforeCall(clOrdID, action, mark, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<Error>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, Error.class, callback);
         return call;
     }
     /**
@@ -1832,7 +1788,7 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+    
     private com.squareup.okhttp.Call getCommandsValidateBeforeCall(final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = getCommandsCall(progressListener, progressRequestListener);
@@ -1863,8 +1819,7 @@ public class AlgosApi {
      */
     public ApiResponse<StrategyRecords> getCommandsWithHttpInfo() throws ApiException {
         com.squareup.okhttp.Call call = getCommandsValidateBeforeCall(null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -1896,8 +1851,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = getCommandsValidateBeforeCall(progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -1966,7 +1920,7 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+    
     private com.squareup.okhttp.Call getStrategiesValidateBeforeCall(String userName, String sponsor, Integer status, StrategyCodeT strategyCode, Integer detailed, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = getStrategiesCall(userName, sponsor, status, strategyCode, detailed, limit, progressListener, progressRequestListener);
@@ -2009,8 +1963,7 @@ public class AlgosApi {
      */
     public ApiResponse<StrategyRecords> getStrategiesWithHttpInfo(String userName, String sponsor, Integer status, StrategyCodeT strategyCode, Integer detailed, Integer limit) throws ApiException {
         com.squareup.okhttp.Call call = getStrategiesValidateBeforeCall(userName, sponsor, status, strategyCode, detailed, limit, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -2048,8 +2001,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = getStrategiesValidateBeforeCall(userName, sponsor, status, strategyCode, detailed, limit, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -2102,7 +2054,7 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
+    
     private com.squareup.okhttp.Call getStrategyValidateBeforeCall(UUID clOrdID, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'clOrdID' is set
         if (clOrdID == null) {
@@ -2139,8 +2091,7 @@ public class AlgosApi {
      */
     public ApiResponse<StrategyRecords> getStrategyWithHttpInfo(UUID clOrdID) throws ApiException {
         com.squareup.okhttp.Call call = getStrategyValidateBeforeCall(clOrdID, null, null);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, StrategyRecords.class);
     }
 
     /**
@@ -2173,8 +2124,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = getStrategyValidateBeforeCall(clOrdID, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<StrategyRecords>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, StrategyRecords.class, callback);
         return call;
     }
     /**
@@ -2226,7 +2176,6 @@ public class AlgosApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call v1CommandsPostValidateBeforeCall(Command body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = v1CommandsPostCall(body, progressListener, progressRequestListener);
@@ -2259,8 +2208,7 @@ public class AlgosApi {
      */
     public ApiResponse<Error> v1CommandsPostWithHttpInfo(Command body) throws ApiException {
         com.squareup.okhttp.Call call = v1CommandsPostValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<Error>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, Error.class);
     }
 
     /**
@@ -2293,8 +2241,7 @@ public class AlgosApi {
         }
 
         com.squareup.okhttp.Call call = v1CommandsPostValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<Error>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, Error.class, callback);
         return call;
     }
 }

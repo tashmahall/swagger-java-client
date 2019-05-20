@@ -13,15 +13,12 @@
 package io.swagger.client.api;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import io.swagger.client.ApiCallback;
 import io.swagger.client.ApiClient;
@@ -36,7 +33,7 @@ import io.swagger.client.model.Login;
 
 public class AuthApi {
     private ApiClient apiClient;
-
+    
     public AuthApi() {
         this(Configuration.getDefaultApiClient());
     }
@@ -102,7 +99,6 @@ public class AuthApi {
         return apiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAuthNames, progressRequestListener);
     }
     
-    @SuppressWarnings("rawtypes")
     private com.squareup.okhttp.Call getAuthTokenValidateBeforeCall(Login body, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         com.squareup.okhttp.Call call = getAuthTokenCall(body, progressListener, progressRequestListener);
@@ -122,13 +118,7 @@ public class AuthApi {
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
     public InlineResponse200 getAuthToken(Login body) throws ApiException {
-        ApiResponse<String> resp = getAuthTokenWithHttpInfo(body);
-        ObjectMapper om = new ObjectMapper();
-        try {
-			return om.readValue(resp.getData(), InlineResponse200.class);
-		} catch (IOException e) {
-			throw new ApiException();
-		}
+        return getAuthTokenWithHttpInfo(body).getData();
     }
 
     /**
@@ -138,10 +128,9 @@ public class AuthApi {
      * @return ApiResponse&lt;InlineResponse200&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<String> getAuthTokenWithHttpInfo(Login body) throws ApiException {
+    public ApiResponse<InlineResponse200> getAuthTokenWithHttpInfo(Login body) throws ApiException {
         com.squareup.okhttp.Call call = getAuthTokenValidateBeforeCall(body, null, null);
-        Type localVarReturnType = new TypeToken<String>(){}.getType();
-        return apiClient.execute(call, localVarReturnType);
+        return apiClient.execute(call, InlineResponse200.class);
     }
 
     /**
@@ -174,8 +163,7 @@ public class AuthApi {
         }
 
         com.squareup.okhttp.Call call = getAuthTokenValidateBeforeCall(body, progressListener, progressRequestListener);
-        Type localVarReturnType = new TypeToken<InlineResponse200>(){}.getType();
-        apiClient.executeAsync(call, localVarReturnType, callback);
+        apiClient.executeAsync(call, InlineResponse200.class, callback);
         return call;
     }
 }

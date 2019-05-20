@@ -13,6 +13,7 @@
 package io.swagger.client.api;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,6 +29,8 @@ import io.swagger.client.model.ABMessageSorder;
 import io.swagger.client.model.InlineResponse200;
 import io.swagger.client.model.InlineResponse202;
 import io.swagger.client.model.Login;
+import io.swagger.client.model.StrategyCommandResponse;
+import io.swagger.client.model.Error;
 
 /**
  * API tests for AlgosApi
@@ -37,6 +40,28 @@ public class AlgosApiTest {
     private AlgosApi api;
     private ApiClient apiClient;
     private InlineResponse200 logginResponse;
+    private String algoSorder =  "{\n" + 
+			"  \"Name\": \"Estrategia com PETR4\",\n" + 
+			"  \"InitTime\": \"09:00:00\",\n" + 
+			"  \"EndTime\": \"17:53:00\",\n" + 
+			"  \"ExpireDate\": \"20191605\",\n" + 
+			"  \"Text\": \"A comment for my strategy\",\n" + 
+			"  \"BasketId\": \"my-basket\",\n" + 
+			"  \"StrategyCode\": \"sorder\",\n" + 
+			"  \"CustomParameters\": {\n" + 
+			"    \"PriceLimit\": 42\n" + 
+			"  },\n" + 
+			"  \"StrategyLegs\": [\n" + 
+			"    {\n" + 
+			"      \"ILegAllocAccount\": \"XBSPgeorgecabral\",\n" + 
+			"      \"LegQuantity\": 100,\n" + 
+			"      \"LegSecurityExchange\": \"XBSP\",\n" + 
+			"      \"LegSide\": \"1\",\n" + 
+			"      \"LegSymbol\": \"PETR4\",\n" + 
+			"      \"LegOrdType\": \"1\"\n" + 
+			"    }\n" + 
+			"  ]\n" + 
+			"}";
     
     @Before
     public void load() throws ApiException {
@@ -79,55 +104,38 @@ public class AlgosApiTest {
      * @throws JsonParseException 
      */
     @Test
-    public void executeStrategyTest() throws ApiException, JsonParseException, JsonMappingException, IOException {
-    	String algo = "{\n" + 
-    			"  \"Name\": \"Estrategia com PETR4\",\n" + 
-    			"  \"InitTime\": \"09:00:00\",\n" + 
-    			"  \"EndTime\": \"17:53:00\",\n" + 
-    			"  \"ExpireDate\": \"20191605\",\n" + 
-    			"  \"Text\": \"A comment for my strategy\",\n" + 
-    			"  \"BasketId\": \"my-basket\",\n" + 
-    			"  \"StrategyCode\": \"sorder\",\n" + 
-    			"  \"CustomParameters\": {\n" + 
-    			"    \"PriceLimit\": 42\n" + 
-    			"  },\n" + 
-    			"  \"StrategyLegs\": [\n" + 
-    			"    {\n" + 
-    			"      \"ILegAllocAccount\": \"XBSPgeorgecabral\",\n" + 
-    			"      \"LegQuantity\": 100,\n" + 
-    			"      \"LegSecurityExchange\": \"XBSP\",\n" + 
-    			"      \"LegSide\": \"1\",\n" + 
-    			"      \"LegSymbol\": \"PETR4\",\n" + 
-    			"      \"LegOrdType\": \"1\"\n" + 
-    			"    }\n" + 
-    			"  ]\n" + 
-    			"}";
-        
-            ABMessageSorder body = new ObjectMapper().readValue(algo, ABMessageSorder.class) ; // ABMessageGrddin | Strategy to execute
+    public void executeStrategySorderTest() throws ApiException, JsonParseException, JsonMappingException, IOException {
+            ABMessageSorder body = new ObjectMapper().readValue(algoSorder, ABMessageSorder.class) ;
             InlineResponse202 response = api.executeStrategy(body);
             System.out.println(new ObjectMapper().convertValue(response, JsonNode.class).toString());
 //        
 
         // TODO: test validations
     }
-//    /**
-//     * Send a Command for a running Algo
-//     *
-//     * Execute Command available for a given algo (cancel, suspend, resume)
-//     *
-//     * @throws ApiException
-//     *          if the Api call fails
-//     */
-//    @Test
-//    public void executeStrategyCommandTest() throws ApiException {
-//        UUID clOrdID = null;
-//        String action = null;
-//        String mark = null;
-//        Error response = api.executeStrategyCommand(clOrdID, action, mark);
-//
-//        // TODO: test validations
-//    }
-//    /**
+    /**
+     * Send a Command for a running Algo
+     *
+     * Execute Command available for a given algo (cancel, suspend, resume)
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     * @throws IOException 
+     * @throws JsonMappingException 
+     * @throws JsonParseException 
+     */
+    @Test
+    public void executeStrategyCommandTest() throws ApiException, JsonParseException, JsonMappingException, IOException {
+        ABMessageSorder body = new ObjectMapper().readValue(algoSorder, ABMessageSorder.class) ;
+        InlineResponse202 responseSorder = api.executeStrategy(body);
+        UUID clOrdID = responseSorder.getClOrdID();
+        System.out.println(responseSorder.getClOrdID());
+        String action = "cancel";
+        String mark = "Cancel Last Order";
+        StrategyCommandResponse response = api.executeStrategyCommand(clOrdID, action, mark);
+        System.out.println(response.getResponse());
+        // TODO: test validations
+    }
+    /**
 //     * Return the list of all Commands sent
 //     *
 //     * Return the list all Commands sent for current user 
