@@ -509,7 +509,7 @@ public class ApiClient {
 	 *
 	 * @param param Parameter
 	 * @return String representation of the parameter
-	 * @throws JsonProcessingException 
+	 * @throws JsonProcessingException
 	 */
 	public String parameterToString(Object param) throws ApiException {
 		try {
@@ -531,7 +531,7 @@ public class ApiClient {
 			} else {
 				return String.valueOf(param);
 			}
-		}catch( JsonProcessingException e) {
+		} catch (JsonProcessingException e) {
 			throw new ApiException(e);
 		}
 	}
@@ -545,10 +545,10 @@ public class ApiClient {
 	 * @param name  The name of the parameter.
 	 * @param value The value of the parameter.
 	 * @return A list containing a single {@code Pair} object.
-	 * @throws ApiException 
-	 * @throws JsonProcessingException 
+	 * @throws ApiException
+	 * @throws JsonProcessingException
 	 */
-	public List<Pair> parameterToPair(String name, Object value) throws ApiException  {
+	public List<Pair> parameterToPair(String name, Object value) throws ApiException {
 		List<Pair> params = new ArrayList<Pair>();
 
 		// preconditions
@@ -570,10 +570,10 @@ public class ApiClient {
 	 * @param name             The name of the parameter.
 	 * @param value            The value of the parameter.
 	 * @return A list of {@code Pair} objects.
-	 * @throws ApiException 
-	 * @throws JsonProcessingException 
+	 * @throws ApiException
+	 * @throws JsonProcessingException
 	 */
-	public List<Pair> parameterToPairs(String collectionFormat, String name, Collection value) throws ApiException  {
+	public List<Pair> parameterToPairs(String collectionFormat, String name, Collection value) throws ApiException {
 		List<Pair> params = new ArrayList<Pair>();
 
 		// preconditions
@@ -632,11 +632,13 @@ public class ApiClient {
 	 * @return True if the given MIME is JSON, false otherwise.
 	 */
 	public static boolean isJsonMime(String mime) {
-        final String[] localVarContentTypes = {
-                "application/json#sorder", "application/json#fxorder", "application/json#boffer", "application/json#sniper", "application/json#mit", "application/json#spread", "application/json#lgshort", "application/json#financ", "application/json#grddin", "application/json#grdlin", "application/json#arbintf"
-            };
+		final String[] localVarContentTypes = { "application/json#sorder", "application/json#fxorder",
+				"application/json#boffer", "application/json#sniper", "application/json#mit", "application/json#spread",
+				"application/json#lgshort", "application/json#financ", "application/json#grddin",
+				"application/json#grdlin", "application/json#arbintf" };
 		String jsonMime = "(?i)^(application/json|[^;/ \t]+/[^;/ \t]+[+]json)[ \t]*(;.*)?$";
-		return mime != null && (mime.matches(jsonMime) || mime.equals("*/*")||Arrays.asList(localVarContentTypes).contains(mime));
+		return mime != null
+				&& (mime.matches(jsonMime) || mime.equals("*/*") || Arrays.asList(localVarContentTypes).contains(mime));
 	}
 
 	public static void main(String[] ac) {
@@ -757,7 +759,7 @@ public class ApiClient {
 				throw new ApiException("Content type \"" + contentType + "\" is not supported for type: " + returnType,
 						response.code(), response.headers().toMultimap(), respBody);
 			}
-		}catch (IOException e) {
+		} catch (IOException e) {
 			throw new ApiException(e.getMessage());
 		}
 
@@ -791,7 +793,7 @@ public class ApiClient {
 			} else {
 				throw new ApiException("Content type \"" + contentType + "\" is not supported");
 			}
-		}catch(JsonProcessingException e) {
+		} catch (JsonProcessingException e) {
 			throw new ApiException(e);
 		}
 	}
@@ -886,6 +888,7 @@ public class ApiClient {
 	public <T> ApiResponse<T> execute(Call call, Class<T> returnType) throws ApiException {
 		try {
 			Response response = call.execute();
+			System.out.println(response.toString());
 			T data = handleResponse(response, returnType);
 			return new ApiResponse<T>(response.code(), response.headers().toMultimap(), data);
 		} catch (IOException e) {
@@ -991,11 +994,8 @@ public class ApiClient {
 	 * @return The HTTP call
 	 * @throws ApiException If fail to serialize the request body object
 	 */
-	public Call buildCall(String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams,
-			Object body, Map<String, String> headerParams, Map<String, Object> formParams, String[] authNames,
-			ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
-		Request request = buildRequest(path, method, queryParams, collectionQueryParams, body, headerParams, formParams,
-				authNames, progressRequestListener);
+	public Call buildCall(String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams,	Object body, Map<String, String> headerParams, Map<String, Object> formParams, String[] authNames,	ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+		Request request = buildRequest(path, method, queryParams, collectionQueryParams, body, headerParams, formParams, authNames, progressRequestListener);
 
 		return httpClient.newCall(request);
 	}
@@ -1016,9 +1016,7 @@ public class ApiClient {
 	 * @return The HTTP request
 	 * @throws ApiException If fail to serialize the request body object
 	 */
-	public Request buildRequest(String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams,
-			Object body, Map<String, String> headerParams, Map<String, Object> formParams, String[] authNames,
-			ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+	public Request buildRequest(String path, String method, List<Pair> queryParams, List<Pair> collectionQueryParams, Object body, Map<String, String> headerParams, Map<String, Object> formParams, String[] authNames, ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
 		updateParamsForAuth(authNames, queryParams, headerParams);
 
 		final String url = buildUrl(path, queryParams, collectionQueryParams);
@@ -1070,7 +1068,7 @@ public class ApiClient {
 	 * @param queryParams           The query parameters
 	 * @param collectionQueryParams The collection query parameters
 	 * @return The full URL
-	 * @throws ApiException 
+	 * @throws ApiException
 	 */
 	public String buildUrl(String path, List<Pair> queryParams, List<Pair> collectionQueryParams) throws ApiException {
 		final StringBuilder url = new StringBuilder();
@@ -1118,7 +1116,7 @@ public class ApiClient {
 	 *
 	 * @param headerParams Header parameters in the ofrm of Map
 	 * @param reqBuilder   Reqeust.Builder
-	 * @throws ApiException 
+	 * @throws ApiException
 	 */
 	public void processHeaderParams(Map<String, String> headerParams, Request.Builder reqBuilder) throws ApiException {
 		for (Entry<String, String> param : headerParams.entrySet()) {
@@ -1152,7 +1150,7 @@ public class ApiClient {
 	 *
 	 * @param formParams Form parameters in the form of Map
 	 * @return RequestBody
-	 * @throws ApiException 
+	 * @throws ApiException
 	 */
 	public RequestBody buildRequestBodyFormEncoding(Map<String, Object> formParams) throws ApiException {
 		FormEncodingBuilder formBuilder = new FormEncodingBuilder();
@@ -1168,7 +1166,7 @@ public class ApiClient {
 	 *
 	 * @param formParams Form parameters in the form of Map
 	 * @return RequestBody
-	 * @throws ApiException 
+	 * @throws ApiException
 	 */
 	public RequestBody buildRequestBodyMultipart(Map<String, Object> formParams) throws ApiException {
 		MultipartBuilder mpBuilder = new MultipartBuilder().type(MultipartBuilder.FORM);

@@ -13,6 +13,8 @@
 package io.swagger.client.api;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.Before;
@@ -21,53 +23,75 @@ import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.swagger.client.ApiClient;
 import io.swagger.client.ApiException;
-import io.swagger.client.model.ABMessageSorder;
+import io.swagger.client.model.ABMessageLgshort;
+import io.swagger.client.model.ABMessagelgshortCustomParameters;
+import io.swagger.client.model.ABMessagespreadStrategyLegs;
+import io.swagger.client.model.BoolFieldYT;
 import io.swagger.client.model.Command;
 import io.swagger.client.model.Command.CommandEnum;
+import io.swagger.client.model.ExchangeT;
+import io.swagger.client.model.ExecutionType;
 import io.swagger.client.model.InlineResponse202;
 import io.swagger.client.model.Login;
+import io.swagger.client.model.SideT;
 import io.swagger.client.model.StrategyCodeT;
 import io.swagger.client.model.StrategyCommandResponse;
 import io.swagger.client.model.StrategyRecords;
+import io.swagger.client.utils.JackJsonUtils;
 
 /**
  * API tests for AlgosApi
  */
-public class AlgosApiTest {
+public class AlgosApiTestLongShort {
 
-    
     private ApiClient apiClient =new ApiClient();
     private AlgosApi api =new AlgosApi(apiClient);
-    private String authToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaHViX2dlb3JnZWNhYnJhbCIsInJvbGUiOiJTVEQiLCJzcG9uc29yIjoiaHViIiwic3J2Z3JwIjoiZGVmYXVsdCIsInNlcnZpY2VzIjpbIkVYRUNfU1JWIiwiRkxFWF9TUlYiXSwiaXNzIjoiaW52ZXN0ZmxleCIsImlhdCI6MTU1ODcwNjU4NCwiZXhwIjoxNTU4NzM1Mzg0fQ.P4Tm7BAqTnbrd37bXQBiqWMMMhxZT6Qv9oQrHZXCt48";
-    private String algoSorder =  "{\n" + 
-			"  \"Name\": \"Estrategia com PETR4\",\n" + 
-			"  \"InitTime\": \"09:00:00\",\n" + 
-			"  \"EndTime\": \"16:53:00\",\n" + 
-			"  \"ExpireDate\": \"20193105\",\n" + 
-			"  \"Text\": \"A comment for my strategy\",\n" + 
-			"  \"BasketId\": \"my-basket\",\n" + 
-			"  \"StrategyCode\": \"sorder\",\n" + 
-			"  \"CustomParameters\": {\n" + 
-			"    \"PriceLimit\": 42\n" + 
-			"  },\n" + 
-			"  \"StrategyLegs\": [\n" + 
-			"    {\n" + 
-			"      \"ILegAllocAccount\": \"XBSPgeorgecabral\",\n" + 
-			"      \"LegQuantity\": 100,\n" + 
-			"      \"LegSecurityExchange\": \"XBSP\",\n" + 
-			"      \"LegSide\": \"1\",\n" + 
-			"      \"LegSymbol\": \"PETR4\",\n" + 
-			"      \"LegOrdType\": \"1\"\n" + 
-			"    }\n" + 
-			"  ]\n" + 
-			"}";
+    private String authToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiaHViX2dlb3JnZWNhYnJhbCIsInJvbGUiOiJTVEQiLCJzcG9uc29yIjoiaHViIiwic3J2Z3JwIjoiZGVmYXVsdCIsInNlcnZpY2VzIjpbIkVYRUNfU1JWIiwiRkxFWF9TUlYiXSwiaXNzIjoiaW52ZXN0ZmxleCIsImlhdCI6MTU1ODcxMDQyNiwiZXhwIjoxNTU4NzM5MjI2fQ.yelDQ7JdYIDVJEFRgpajyBOdIcE_i_-LQvw2tfu2e20" ;
+    private ABMessageLgshort lgShort ;
+
     @Before
     public void load() throws ApiException {
+    	lgShort = new ABMessageLgshort();
+    	lgShort.setName("Estrategia com PETR4");
+    	lgShort.setInitTime("09:00:00");
+    	lgShort.setEndTime("16:53:00");
+    	lgShort.setBasketId("my-basket");
+    	lgShort.setExpireDate("20193105");
+    	
+    	lgShort.setStrategyCode(StrategyCodeT.LGSHORT.toString());
+    	lgShort.setText("A comment for my strategy");
+    	ABMessagelgshortCustomParameters customParameters = new ABMessagelgshortCustomParameters();
+    	customParameters.setTrigger(ABMessagelgshortCustomParameters.TriggerEnum._2.getValue());
+    	customParameters.setBookDepth(1);
+    	customParameters.setCompensateExec(ABMessagelgshortCustomParameters.CompensateExecEnum._2.getValue());
+    	customParameters.setExecutionType(ExecutionType.ENTRY.getValue());
+//    	customParameters.setTriggerValue(new BigDecimal(0.01));
+    	lgShort.setCustomParameters(customParameters);
+    	ABMessagespreadStrategyLegs strategyLegs1 = new ABMessagespreadStrategyLegs();
+    	strategyLegs1.setIlegAllocAccount("XBSPgeorgecabral");
+    	strategyLegs1.setLegQuantity(100);
+    	strategyLegs1.setLegSecurityExchange(ExchangeT.XBMF);
+    	strategyLegs1.setLegSide(SideT._1);
+    	strategyLegs1.setLegSymbol("PETR4");
+    	strategyLegs1.setLegResting(BoolFieldYT.Y);
+    	strategyLegs1.setLegMaxClipSize(100);
+    	
+    	ABMessagespreadStrategyLegs strategyLegs = new ABMessagespreadStrategyLegs();
+    	strategyLegs.setIlegAllocAccount("XBSPgeorgecabral");
+    	strategyLegs.setLegQuantity(100);
+    	strategyLegs.setLegSecurityExchange(ExchangeT.XBMF);
+    	strategyLegs.setLegSide(SideT._1);
+    	strategyLegs.setLegSymbol("PETR4");
+    	strategyLegs.setLegResting(BoolFieldYT.Y);
+    	strategyLegs.setLegMaxClipSize(100);
+    	List<ABMessagespreadStrategyLegs> listStrategyLeg = new ArrayList<ABMessagespreadStrategyLegs>();
+    	listStrategyLeg.add(strategyLegs);
+    	listStrategyLeg.add(strategyLegs1);
+    	lgShort.setStrategyLegs(listStrategyLeg);
+    	
     	if(!StringUtils.isEmpty(authToken)) {
     		apiClient.setAccessToken(authToken);
     		return;
@@ -80,24 +104,12 @@ public class AlgosApiTest {
         authToken = loginApi.getAuthToken(body).getAuthToken();
         apiClient.setAccessToken(authToken);
         System.out.println(authToken);
+
+
+        
+        
     }
 
-//    /**
-//     * Send a Algo Edition for a running strategy to Execution Server
-//     *
-//     * Send a Algo Edition for a running strategy to modify strategy execution parameters
-//     *
-//     * @throws ApiException
-//     *          if the Api call fails
-//     */
-//    @Test
-//    public void editStrategyTest() throws ApiException {
-//        UUID clOrdID = null;
-//        ABMessageGrddin body = null;
-//        Error response = api.editStrategy(clOrdID, body);
-//
-//        // TODO: test validations
-//    }
     /**
      * Send a new Algo to Execution Server
      *
@@ -110,10 +122,10 @@ public class AlgosApiTest {
      * @throws JsonParseException 
      */
     @Test
-    public void executeStrategySorderTest() throws ApiException, JsonParseException, JsonMappingException, IOException {
-            ABMessageSorder body = new ObjectMapper().readValue(algoSorder, ABMessageSorder.class) ;
-            InlineResponse202 response = api.executeStrategy(body);
-            System.out.println(new ObjectMapper().convertValue(response, JsonNode.class).toString());
+    public void executeStrategyLgShortTest() throws ApiException, JsonParseException, JsonMappingException, IOException {
+            
+            InlineResponse202 response = api.executeStrategy(lgShort);
+            System.out.println(JackJsonUtils.entityToObjectNode(response));
 //        
 
         // TODO: test validations
@@ -140,8 +152,7 @@ public class AlgosApiTest {
      */
     @Test
     public void executeStrategyCommandTest() throws ApiException, JsonParseException, JsonMappingException, IOException {
-        ABMessageSorder body = new ObjectMapper().readValue(algoSorder, ABMessageSorder.class) ;
-        InlineResponse202 responseSorder = api.executeStrategy(body);
+        InlineResponse202 responseSorder = api.executeStrategy(lgShort);
         UUID clOrdID = responseSorder.getClOrdID();
         System.out.println(responseSorder.getClOrdID());
         String action = "cancel";
@@ -178,7 +189,7 @@ public class AlgosApiTest {
         String userName = null;
         String sponsor = null;
         Integer status = 10;
-        StrategyCodeT strategyCode = StrategyCodeT.SORDER;
+        StrategyCodeT strategyCode = StrategyCodeT.LGSHORT;
         Integer detailed = 1;
         Integer limit = 25;
         StrategyRecords response = api.getStrategies(userName, sponsor, status, strategyCode, detailed, limit);
@@ -205,8 +216,7 @@ public class AlgosApiTest {
      */
     @Test
     public void getStrategyTest() throws ApiException, JsonParseException, JsonMappingException, IOException {
-        ABMessageSorder body = new ObjectMapper().readValue(algoSorder, ABMessageSorder.class) ;
-        InlineResponse202 responseSorder = api.executeStrategy(body);
+        InlineResponse202 responseSorder = api.executeStrategy(lgShort);
         UUID clOrdID = responseSorder.getClOrdID();
         System.out.println(responseSorder.getClOrdID());
         StrategyRecords response = api.getStrategy(clOrdID);

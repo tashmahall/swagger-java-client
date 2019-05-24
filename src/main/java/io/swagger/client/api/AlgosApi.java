@@ -1043,7 +1043,7 @@ public class AlgosApi {
         if (localVarAccept != null) localVarHeaderParams.put("Accept", localVarAccept);
 
         final String[] localVarContentTypes = {
-            "application/json#sorder", "application/json#fxorder", "application/json#boffer", "application/json#sniper", "application/json#mit", "application/json#spread", "application/json#lgshort", "application/json#financ", "application/json#grddin", "application/json#grdlin", "application/json#arbintf"
+            "application/json#lgshort"
         };
         final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
         localVarHeaderParams.put("Content-Type", localVarContentType);
@@ -2194,8 +2194,8 @@ public class AlgosApi {
      * @return Error
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public Error v1CommandsPost(Command body) throws ApiException {
-        ApiResponse<Error> resp = v1CommandsPostWithHttpInfo(body);
+    public String v1CommandsPost(Command body) throws ApiException {
+        ApiResponse<String> resp = v1CommandsPostWithHttpInfo(body);
         return resp.getData();
     }
 
@@ -2206,9 +2206,9 @@ public class AlgosApi {
      * @return ApiResponse&lt;Error&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<Error> v1CommandsPostWithHttpInfo(Command body) throws ApiException {
+    public ApiResponse<String> v1CommandsPostWithHttpInfo(Command body) throws ApiException {
         com.squareup.okhttp.Call call = v1CommandsPostValidateBeforeCall(body, null, null);
-        return apiClient.execute(call, Error.class);
+        return apiClient.execute(call, String.class);
     }
 
     /**

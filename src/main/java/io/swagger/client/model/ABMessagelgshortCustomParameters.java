@@ -28,19 +28,19 @@ public class ABMessagelgshortCustomParameters   {
    * Type of trigger.  * 2=ratio,buy/sell,  * 3=ratio sell/buy, * 4=price diff buy/sell, * 5=price diff sell/buy, * 11=financeiro 
    */
   public enum TriggerEnum {
-    _2(new BigDecimal("2")),
+    _2(new Integer("2")),
     
-    _3(new BigDecimal("3")),
+    _3(new Integer("3")),
     
-    _4(new BigDecimal("4")),
+    _4(new Integer("4")),
     
-    _5(new BigDecimal("5")),
+    _5(new Integer("5")),
     
-    _11(new BigDecimal("11"));
+    _11(new Integer("11"));
 
-    private BigDecimal value;
+    private Integer value;
 
-    TriggerEnum(BigDecimal value) {
+    TriggerEnum(Integer value) {
       this.value = value;
     }
 
@@ -48,6 +48,9 @@ public class ABMessagelgshortCustomParameters   {
     @JsonValue
     public String toString() {
       return String.valueOf(value);
+    }
+    public Integer getValue() {
+    	return value;
     }
 
     @JsonCreator
@@ -61,27 +64,30 @@ public class ABMessagelgshortCustomParameters   {
     }
   }
   @JsonProperty("Trigger")
-  private TriggerEnum trigger = null;
+  private Integer trigger = null;
 
   @JsonProperty("BookDepth")
   private Integer bookDepth = null;
 
   @JsonProperty("IgnoreOffersLT")
   private Integer ignoreOffersLT = null;
+  
+  @JsonProperty("ExecutionType")
+  private Integer executionType = null;
 
   /**
    * Type of compensation when unbalanced - 0=No comp, 1=next clip, 2=gradual 
    */
   public enum CompensateExecEnum {
-    _0(new BigDecimal("0")),
+    _0(new Integer("0")),
     
-    _1(new BigDecimal("1")),
+    _1(new Integer("1")),
     
-    _2(new BigDecimal("2"));
+    _2(new Integer("2"));
 
-    private BigDecimal value;
+    private Integer value;
 
-    CompensateExecEnum(BigDecimal value) {
+    CompensateExecEnum(Integer value) {
       this.value = value;
     }
 
@@ -90,7 +96,9 @@ public class ABMessagelgshortCustomParameters   {
     public String toString() {
       return String.valueOf(value);
     }
-
+    public Integer getValue() {
+    	return value;
+    }
     @JsonCreator
     public static CompensateExecEnum fromValue(String text) {
       for (CompensateExecEnum b : CompensateExecEnum.values()) {
@@ -102,7 +110,7 @@ public class ABMessagelgshortCustomParameters   {
     }
   }
   @JsonProperty("CompensateExec")
-  private CompensateExecEnum compensateExec = null;
+  private Integer compensateExec = null;
 
   @JsonProperty("InitSuspended")
   private BoolFieldNT initSuspended = null;
@@ -128,7 +136,7 @@ public class ABMessagelgshortCustomParameters   {
   }
 
   public ABMessagelgshortCustomParameters trigger(TriggerEnum trigger) {
-    this.trigger = trigger;
+    this.trigger = trigger.getValue();
     return this;
   }
 
@@ -139,11 +147,11 @@ public class ABMessagelgshortCustomParameters   {
   @ApiModelProperty(value = "Type of trigger.  * 2=ratio,buy/sell,  * 3=ratio sell/buy, * 4=price diff buy/sell, * 5=price diff sell/buy, * 11=financeiro ")
 
   @Valid
-  public TriggerEnum getTrigger() {
+  public Integer getTrigger() {
     return trigger;
   }
 
-  public void setTrigger(TriggerEnum trigger) {
+  public void setTrigger(Integer trigger) {
     this.trigger = trigger;
   }
 
@@ -189,7 +197,7 @@ public class ABMessagelgshortCustomParameters   {
   }
 
   public ABMessagelgshortCustomParameters compensateExec(CompensateExecEnum compensateExec) {
-    this.compensateExec = compensateExec;
+    this.compensateExec = compensateExec.value;
     return this;
   }
 
@@ -200,11 +208,11 @@ public class ABMessagelgshortCustomParameters   {
   @ApiModelProperty(example = "2", value = "Type of compensation when unbalanced - 0=No comp, 1=next clip, 2=gradual ")
 
   @Valid
-  public CompensateExecEnum getCompensateExec() {
+  public Integer getCompensateExec() {
     return compensateExec;
   }
 
-  public void setCompensateExec(CompensateExecEnum compensateExec) {
+  public void setCompensateExec(Integer compensateExec) {
     this.compensateExec = compensateExec;
   }
 
@@ -276,4 +284,13 @@ public class ABMessagelgshortCustomParameters   {
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+public Integer getExecutionType() {
+	return executionType;
+}
+
+public void setExecutionType(Integer executionType) {
+	this.executionType = executionType;
+}
+  
 }

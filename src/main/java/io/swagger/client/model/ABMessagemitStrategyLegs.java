@@ -36,7 +36,15 @@ public class ABMessagemitStrategyLegs   {
 
   @JsonProperty("LegMinClipSize")
   private Integer legMinClipSize = null;
+  
+  @JsonProperty("LegResting")
+  private BoolFieldYT legResting = null;
 
+  @JsonProperty("LegFirstTimeOut")
+  private Integer legFirstTimeOut = null;
+  
+  
+  
   public ABMessagemitStrategyLegs ilegAllocAccount(String ilegAllocAccount) {
     this.ilegAllocAccount = ilegAllocAccount;
     return this;
@@ -172,8 +180,24 @@ public class ABMessagemitStrategyLegs   {
     this.legMinClipSize = legMinClipSize;
   }
 
+  public BoolFieldYT getLegResting() {
+	return legResting;
+}
 
-  @Override
+public void setLegResting(BoolFieldYT legResting) {
+	this.legResting = legResting;
+}
+
+
+public Integer getLegFirstTimeOut() {
+	return legFirstTimeOut;
+}
+
+public void setLegFirstTimeOut(Integer legFirstTimeOut) {
+	this.legFirstTimeOut = legFirstTimeOut;
+}
+
+@Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
       return true;
